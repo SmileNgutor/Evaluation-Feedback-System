@@ -26,7 +26,7 @@
                                     <span class="mt-4 inline-block text-sm font-medium text-blue-600 group-hover:underline">View Tickets →</span>
                                 </a>
 
-                                <a href="/course-evaluation" class="group block rounded-xl bg-white p-6 text-center shadow-lg border border-gray-200 hover:shadow-xl hover:border-green-400 transition-all duration-200 overflow-visible">
+                                <a href="{{route('course.evaluation')}}" class="group block rounded-xl bg-white p-6 text-center shadow-lg border border-gray-200 hover:shadow-xl hover:border-green-400 transition-all duration-200 overflow-visible">
                                     <div class="mx-auto flex h-16 w-16 -translate-y-8 transform items-center justify-center rounded-full bg-green-600 shadow-lg shadow-green-500/30 transition-transform duration-200">
                                         <!-- Course Evaluation Icon -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -126,7 +126,7 @@
                         <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Admin Dashboard</h2>
                         <div class="w-full p-6 card-container">
                             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                                <a href="/admin/all-feedback" class="group block rounded-xl bg-white p-6 text-center shadow-lg border border-gray-200 hover:shadow-xl hover:border-red-400 transition-all duration-200 overflow-visible">
+                                <a href="{{route('itsupport')}}" class="group block rounded-xl bg-white p-6 text-center shadow-lg border border-gray-200 hover:shadow-xl hover:border-red-400 transition-all duration-200 overflow-visible">
                                     <div class="mx-auto flex h-16 w-16 -translate-y-8 transform items-center justify-center rounded-full bg-red-600 shadow-lg shadow-red-500/30 transition-transform duration-200">
                                         <!-- All Feedback Icon -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
