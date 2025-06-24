@@ -1,8 +1,8 @@
 import 'preline';
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     window.HSStaticMethods.autoInit(); // Add this
-// });
+document.addEventListener('DOMContentLoaded', () => {
+    window.HSStaticMethods.autoInit(); // Add this
+});
 // Run after DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initComponents(); // 👈 initialize Preline
