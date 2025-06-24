@@ -23,6 +23,20 @@ Route::get('/dashboard/itsupport-student', function () {
     return view('it-support-student');
 })->middleware(['auth', 'verified'])->name('itsupport-student');
 
+Route::get('/dashboard/cafeteria-student', function () {
+    return view('cafeteria-student');
+})->middleware(['auth', 'verified'])->name('cafeteria-student');
+
+Route::get('/dashboard/class-student', function () {
+    return view('class-student');
+})->middleware(['auth', 'verified'])->name('class-student');
+
+
+
+
+
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

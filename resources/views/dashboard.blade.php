@@ -38,7 +38,7 @@
                                     <span class="mt-4 inline-block text-sm font-medium text-green-600 group-hover:underline">Give Feedback →</span>
                                 </a>
 
-                                <a href="/cafeteria-feedback" class="group block rounded-xl bg-white p-6 text-center shadow-lg border border-gray-200 hover:shadow-xl hover:border-orange-400 transition-all duration-200 overflow-visible">
+                                <a href="{{route('cafeteria-student')}}" class="group block rounded-xl bg-white p-6 text-center shadow-lg border border-gray-200 hover:shadow-xl hover:border-orange-400 transition-all duration-200 overflow-visible">
                                     <div class="mx-auto flex h-16 w-16 -translate-y-8 transform items-center justify-center rounded-full bg-orange-500 shadow-lg shadow-orange-500/30 transition-transform duration-200">
                                         <!-- Cafeteria Services Icon -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -50,7 +50,7 @@
                                     <span class="mt-4 inline-block text-sm font-medium text-orange-600 group-hover:underline">Rate Service →</span>
                                 </a>
 
-                                <a href="/maintenance" class="group block rounded-xl bg-white p-6 text-center shadow-lg border border-gray-200 hover:shadow-xl hover:border-purple-400 transition-all duration-200 overflow-visible">
+                                <a href="{{route('class-student')}}" class="group block rounded-xl bg-white p-6 text-center shadow-lg border border-gray-200 hover:shadow-xl hover:border-purple-400 transition-all duration-200 overflow-visible">
                                     <div class="mx-auto flex h-16 w-16 -translate-y-8 transform items-center justify-center rounded-full bg-purple-600 shadow-lg shadow-purple-500/30 transition-transform duration-200">
                                         <!-- Classroom Maintenance Icon -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
