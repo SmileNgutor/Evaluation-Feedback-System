@@ -19,6 +19,10 @@ Route::get('/dashboard/itsupport', function () {
     return view('it-support');
 })->middleware(['auth', 'verified'])->name('itsupport');
 
+Route::get('/dashboard/itsupport-student', function () {
+    return view('it-support-student');
+})->middleware(['auth', 'verified'])->name('itsupport-student');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

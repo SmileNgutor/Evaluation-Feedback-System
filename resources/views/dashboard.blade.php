@@ -14,7 +14,7 @@
                         <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Student Dashboard</h2>
                         <div class="w-full p-6 card-container">
                             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                                <a href="/it-support" class="group block rounded-xl bg-white p-6 text-center shadow-lg border border-gray-200 hover:shadow-xl hover:border-blue-400 transition-all duration-200 overflow-visible">
+                                <a href="{{route("itsupport-student")}}" class="group block rounded-xl bg-white p-6 text-center shadow-lg border border-gray-200 hover:shadow-xl hover:border-blue-400 transition-all duration-200 overflow-visible">
                                     <div class="mx-auto flex h-16 w-16 -translate-y-8 transform items-center justify-center rounded-full bg-blue-600 shadow-lg shadow-blue-500/30 transition-transform duration-200">
                                         <!-- IT Support Icon -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
