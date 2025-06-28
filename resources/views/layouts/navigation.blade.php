@@ -49,42 +49,34 @@
                         <ul class="space-y-1">
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('it-support') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/it-support') }}">
+                                   {{ request()->routeIs('itsupport-student') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
+                                   href="{{ route('itsupport-student') }}">
                                     <i class="lucide lucide-hard-drive size-4"></i>
                                     IT Support
                                 </a>
                             </li>
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('course-evaluation') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/course-evaluation') }}">
+                                   {{ request()->routeIs('course.evaluation') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
+                                   href="{{ route('course.evaluation') }}">
                                     <i class="lucide lucide-clipboard-list size-4"></i>
                                     Course Evaluation
                                 </a>
                             </li>
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('cafeteria-feedback') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/cafeteria-feedback') }}">
+                                   {{ request()->routeIs('cafeteria-student') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
+                                   href="{{ route('cafeteria-student') }}">
                                     <i class="lucide lucide-utensils size-4"></i>
                                     Cafeteria Feedback
                                 </a>
                             </li>
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('maintenance') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/maintenance') }}">
-                                    <i class="lucide lucide-hammer size-4"></i>
+                                   {{ request()->routeIs('class-student') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
+                                   href="{{ route('class-student') }}">
+                                    <i class="lucide lucide-tool size-4"></i>
                                     Maintenance
-                                </a>
-                            </li>
-                            <li>
-                                <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('my-history') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/my-history') }}">
-                                    <i class="lucide lucide-history size-4"></i>
-                                    My History
                                 </a>
                             </li>
                         </ul>
@@ -99,15 +91,15 @@
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('faculty/course-evaluations') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/faculty/course-evaluations') }}">
+                                   href="/faculty/course-evaluations">
                                     <i class="lucide lucide-bar-chart-2 size-4"></i>
-                                    Course Evaluations
+                                    Course Feedback
                                 </a>
                             </li>
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('faculty/it-support') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/faculty/it-support') }}">
+                                   href="/faculty/it-support">
                                     <i class="lucide lucide-cpu size-4"></i>
                                     IT Support
                                 </a>
@@ -115,7 +107,7 @@
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('faculty/cafeteria-feedback') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/faculty/cafeteria-feedback') }}">
+                                   href="/faculty/cafeteria-feedback">
                                     <i class="lucide lucide-coffee size-4"></i>
                                     Cafeteria Feedback
                                 </a>
@@ -123,17 +115,9 @@
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('faculty/maintenance') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/faculty/maintenance') }}">
-                                    <i class="lucide lucide-tool size-4"></i>
+                                   href="/faculty/maintenance">
+                                    <i class="lucide lucide-wrench size-4"></i>
                                     Maintenance
-                                </a>
-                            </li>
-                            <li>
-                                <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('faculty/summary-reports') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/faculty/summary-reports') }}">
-                                    <i class="lucide lucide-file-text size-4"></i>
-                                    Summary Reports
                                 </a>
                             </li>
                         </ul>
@@ -147,8 +131,8 @@
                         <ul class="space-y-1">
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('admin/all-feedback-reports') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/admin/all-feedback-reports') }}">
+                                   {{ request()->routeIs('itsupport') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
+                                   href="{{ route('itsupport') }}">
                                     <i class="lucide lucide-clipboard-check size-4"></i>
                                     All Feedback
                                 </a>
@@ -156,7 +140,7 @@
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('admin/manage-tickets') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/admin/manage-tickets') }}">
+                                   href="/admin/manage-tickets">
                                     <i class="lucide lucide-ticket size-4"></i>
                                     Manage Tickets
                                 </a>
@@ -164,7 +148,7 @@
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('admin/reports-analytics') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/admin/reports-analytics') }}">
+                                   href="/admin/reports-analytics">
                                     <i class="lucide lucide-line-chart size-4"></i>
                                     Reports & Analytics
                                 </a>
@@ -172,17 +156,9 @@
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('admin/user-management') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/admin/user-management') }}">
+                                   href="/admin/user-management">
                                     <i class="lucide lucide-users size-4"></i>
                                     User Management
-                                </a>
-                            </li>
-                            <li>
-                                <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('admin/alert-thresholds') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/admin/alert-thresholds') }}">
-                                    <i class="lucide lucide-alert-circle size-4"></i>
-                                    Alert Thresholds
                                 </a>
                             </li>
                         </ul>
@@ -197,7 +173,7 @@
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('staff/assigned-tasks') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/staff/assigned-tasks') }}">
+                                   href="/staff/assigned-tasks">
                                     <i class="lucide lucide-list-checks size-4"></i>
                                     Assigned Tasks
                                 </a>
@@ -205,15 +181,15 @@
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('staff/update-status') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/staff/update-status') }}">
+                                   href="/staff/update-status">
                                     <i class="lucide lucide-check-circle size-4"></i>
                                     Update Status
                                 </a>
                             </li>
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('staff/performance-feedback') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/staff/performance-feedback') }}">
+                                   {{ request()->is('staff/feedback-review') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
+                                   href="/staff/feedback-review">
                                     <i class="lucide lucide-star size-4"></i>
                                     Performance Feedback
                                 </a>
@@ -221,7 +197,7 @@
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('staff/cafeteria-dashboard') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="{{ url('/staff/cafeteria-dashboard') }}">
+                                   href="/staff/cafeteria-dashboard">
                                     <i class="lucide lucide-utensils-crossed size-4"></i>
                                     Cafeteria Dashboard
                                 </a>
@@ -273,10 +249,6 @@
                         <img class="shrink-0 size-8 rounded-full" src="https://images.unsplash.com/photo-1734122415415-88cb1d7d5dc0?q=80&w=320&h=320&auto=format&fit=facearea&facepad=3&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Avatar">
                         <div>
                             <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                            <div class="font-medium text-sm text-gray-500">
-
-                                    Super Admin
-                            </div>
                         </div>
                     </div>
 
