@@ -90,8 +90,8 @@
                         <ul class="space-y-1">
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('faculty/course-evaluations') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="/faculty/course-evaluations">
+                                   {{ request()->is('fcourse-feedback-faculty') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
+                                   href="{{route('course-feedback-faculty')}}">
                                     <i data-lucide="bar-chart-2" class="size-4"></i>
                                     Course Feedback
                                 </a>

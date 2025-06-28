@@ -35,6 +35,10 @@ Route::get('/dashboard/user-management', function () {
     return view('user-management');
 })->middleware(['auth', 'verified'])->name('user-management');
 
+Route::get('/dashboard/course-feedback-faculty', function () {
+    return view('course-feedback-faculty');
+})->middleware(['auth', 'verified'])->name('course-feedback-faculty');
+
 
 
 
