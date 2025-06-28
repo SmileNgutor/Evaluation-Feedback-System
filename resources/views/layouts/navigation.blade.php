@@ -106,16 +106,16 @@
                             </li>
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('faculty/cafeteria-feedback') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="/faculty/cafeteria-feedback">
+                                   {{ request()->is('afeteria-student') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
+                                   href="{{ route('cafeteria-student') }}">
                                     <i data-lucide="coffee" class="size-4"></i>
                                     Cafeteria Feedback
                                 </a>
                             </li>
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('faculty/maintenance') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="/faculty/maintenance">
+                                   {{ request()->is('class-student') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
+                                   href="{{ route('class-student') }}">
                                     <i data-lucide="wrench" class="size-4"></i>
                                     Maintenance
                                 </a>
@@ -126,7 +126,7 @@
                     <!-- Admin Section -->
                     <li>
                         <h3 class="mt-6 mb-2 px-2.5 text-xs font-semibold tracking-wider text-gray-500 uppercase">
-                            Admin Portal
+                            Admin Portal (ALL 404 NOT FOUND)
                         </h3>
                         <ul class="space-y-1">
                             <li>
@@ -167,7 +167,7 @@
                     <!-- Staff Section -->
                     <li>
                         <h3 class="mt-6 mb-2 px-2.5 text-xs font-semibold tracking-wider text-gray-500 uppercase">
-                            Staff Portal
+                            Staff Portal (ALL 404 NOT FOUND)
                         </h3>
                         <ul class="space-y-1">
                             <li>
@@ -208,7 +208,7 @@
                     <!-- General Section -->
                     <li>
                         <h3 class="mt-6 mb-2 px-2.5 text-xs font-semibold tracking-wider text-gray-500 uppercase">
-                            General
+                            General (ALL 404 NOT FOUND)
                         </h3>
                         <ul class="space-y-1">
                             <li>
