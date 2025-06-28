@@ -1,4 +1,6 @@
 import 'preline';
+import { createIcons } from 'lucide';
+createIcons();
 
 document.addEventListener('DOMContentLoaded', () => {
     window.HSStaticMethods.autoInit(); // Add this
