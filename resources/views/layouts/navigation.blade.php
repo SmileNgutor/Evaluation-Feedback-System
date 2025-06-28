@@ -21,7 +21,7 @@
 
             <div class="lg:hidden -me-2">
                 <button type="button" class="flex justify-center items-center gap-x-3 size-6 bg-white border border-gray-200 text-sm text-gray-600 hover:bg-gray-100 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-100" data-hs-overlay="#hs-sidebar-footer">
-                    <i class="lucide lucide-x size-4"></i>
+                    <i data-lucide="x" class="size-4"></i>
                     <span class="sr-only">Close</span>
                 </button>
             </div>
@@ -36,7 +36,7 @@
                         <a class="flex items-center gap-x-3 py-2 px-2.5 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                            {{ request()->routeIs('dashboard') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                            href="{{ route('dashboard') }}">
-                            <i class="lucide lucide-home size-4"></i>
+                            <i data-lucide="home" class="size-4"></i>
                             {{ __('Dashboard') }}
                         </a>
                     </li>
@@ -51,7 +51,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->routeIs('itsupport-student') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="{{ route('itsupport-student') }}">
-                                    <i class="lucide lucide-hard-drive size-4"></i>
+                                    <i data-lucide="hard-drive" class="size-4"></i>
                                     IT Support
                                 </a>
                             </li>
@@ -59,7 +59,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->routeIs('course.evaluation') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="{{ route('course.evaluation') }}">
-                                    <i class="lucide lucide-clipboard-list size-4"></i>
+                                    <i data-lucide="clipboard-list" class="size-4"></i>
                                     Course Evaluation
                                 </a>
                             </li>
@@ -67,7 +67,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->routeIs('cafeteria-student') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="{{ route('cafeteria-student') }}">
-                                    <i class="lucide lucide-utensils size-4"></i>
+                                    <i data-lucide="utensils" class="size-4"></i>
                                     Cafeteria Feedback
                                 </a>
                             </li>
@@ -75,7 +75,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->routeIs('class-student') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="{{ route('class-student') }}">
-                                    <i class="lucide lucide-tool size-4"></i>
+                                    <i data-lucide="tool" class="size-4"></i>
                                     Maintenance
                                 </a>
                             </li>
@@ -92,7 +92,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('faculty/course-evaluations') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="/faculty/course-evaluations">
-                                    <i class="lucide lucide-bar-chart-2 size-4"></i>
+                                    <i data-lucide="bar-chart-2" class="size-4"></i>
                                     Course Feedback
                                 </a>
                             </li>
@@ -100,7 +100,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('faculty/it-support') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="/faculty/it-support">
-                                    <i class="lucide lucide-cpu size-4"></i>
+                                    <i data-lucide="cpu" class="size-4"></i>
                                     IT Support
                                 </a>
                             </li>
@@ -108,7 +108,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('faculty/cafeteria-feedback') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="/faculty/cafeteria-feedback">
-                                    <i class="lucide lucide-coffee size-4"></i>
+                                    <i data-lucide="coffee" class="size-4"></i>
                                     Cafeteria Feedback
                                 </a>
                             </li>
@@ -116,7 +116,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('faculty/maintenance') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="/faculty/maintenance">
-                                    <i class="lucide lucide-wrench size-4"></i>
+                                    <i data-lucide="wrench" class="size-4"></i>
                                     Maintenance
                                 </a>
                             </li>
@@ -133,7 +133,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->routeIs('itsupport') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="{{ route('itsupport') }}">
-                                    <i class="lucide lucide-clipboard-check size-4"></i>
+                                    <i data-lucide="clipboard-check" class="size-4"></i>
                                     All Feedback
                                 </a>
                             </li>
@@ -141,7 +141,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('admin/manage-tickets') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="/admin/manage-tickets">
-                                    <i class="lucide lucide-ticket size-4"></i>
+                                    <i data-lucide="ticket" class="size-4"></i>
                                     Manage Tickets
                                 </a>
                             </li>
@@ -149,7 +149,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('admin/reports-analytics') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="/admin/reports-analytics">
-                                    <i class="lucide lucide-line-chart size-4"></i>
+                                    <i data-lucide="line-chart" class="size-4"></i>
                                     Reports & Analytics
                                 </a>
                             </li>
@@ -157,7 +157,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('admin/user-management') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="/admin/user-management">
-                                    <i class="lucide lucide-users size-4"></i>
+                                    <i data-lucide="users" class="size-4"></i>
                                     User Management
                                 </a>
                             </li>
@@ -174,7 +174,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('staff/assigned-tasks') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="/staff/assigned-tasks">
-                                    <i class="lucide lucide-list-checks size-4"></i>
+                                    <i data-lucide="list-checks" class="size-4"></i>
                                     Assigned Tasks
                                 </a>
                             </li>
@@ -182,7 +182,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('staff/update-status') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="/staff/update-status">
-                                    <i class="lucide lucide-check-circle size-4"></i>
+                                    <i data-lucide="check-circle" class="size-4"></i>
                                     Update Status
                                 </a>
                             </li>
@@ -190,7 +190,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('staff/feedback-review') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="/staff/feedback-review">
-                                    <i class="lucide lucide-star size-4"></i>
+                                    <i data-lucide="star" class="size-4"></i>
                                     Performance Feedback
                                 </a>
                             </li>
@@ -198,7 +198,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('staff/cafeteria-dashboard') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="/staff/cafeteria-dashboard">
-                                    <i class="lucide lucide-utensils-crossed size-4"></i>
+                                    <i data-lucide="utensils-crossed" class="size-4"></i>
                                     Cafeteria Dashboard
                                 </a>
                             </li>
@@ -215,7 +215,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('notifications') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="{{ url('/notifications') }}">
-                                    <i class="lucide lucide-bell size-4"></i>
+                                    <i data-lucide="bell" class="size-4"></i>
                                     Notifications
                                 </a>
                             </li>
@@ -223,7 +223,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('calendar') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="{{ url('/calendar') }}">
-                                    <i class="lucide lucide-calendar size-4"></i>
+                                    <i data-lucide="calendar" class="size-4"></i>
                                     Calendar
                                 </a>
                             </li>
@@ -231,7 +231,7 @@
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
                                    {{ request()->is('documentation') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
                                    href="{{ url('/documentation') }}">
-                                    <i class="lucide lucide-file-text size-4"></i>
+                                    <i data-lucide="file-text" class="size-4"></i>
                                     Documentation
                                 </a>
                             </li>
@@ -254,14 +254,14 @@
 
                     <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                        href="{{ route('profile.edit') }}">
-                        <i class="lucide lucide-user size-4"></i>
+                        <i data-lucide="user" class="size-4"></i>
                         {{ __('Profile') }}
                     </a>
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="w-full flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100">
-                            <i class="lucide lucide-log-out size-4"></i>
+                            <i data-lucide="log-out" class="size-4"></i>
                             {{ __('Log Out') }}
                         </button>
                     </form>
