@@ -31,6 +31,10 @@ Route::get('/dashboard/class-student', function () {
     return view('class-student');
 })->middleware(['auth', 'verified'])->name('class-student');
 
+Route::get('/dashboard/user-management', function () {
+    return view('user-management');
+})->middleware(['auth', 'verified'])->name('user-management');
+
 
 
 

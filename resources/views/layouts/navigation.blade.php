@@ -155,8 +155,8 @@
                             </li>
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                                   {{ request()->is('admin/user-management') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
-                                   href="/admin/user-management">
+                                   {{ request()->is('user-management') ? 'bg-gray-100 text-gray-800' : 'text-gray-800' }}"
+                                   href="{{route('user-management')}}">
                                     <i data-lucide="users" class="size-4"></i>
                                     User Management
                                 </a>
