@@ -86,28 +86,28 @@ load_dotenv()
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 # Supabase Database Configuration
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'postgres'),
-        'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
-    }
-}
-
-# Alternative SQLite configuration for local development
-# Uncomment below and comment above for local development without Supabase
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('DB_NAME', 'postgres'),
+#         'USER': os.environ.get('DB_USER', 'postgres'),
+#         'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+#         'HOST': os.environ.get('DB_HOST', 'localhost'),
+#         'PORT': os.environ.get('DB_PORT', '5432'),
+#         'OPTIONS': {
+#             'sslmode': 'require',
+#         },
 #     }
 # }
+
+# Alternative SQLite configuration for local development
+# Using SQLite for local development without Supabase
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -202,9 +202,13 @@ LOGGING = {
 # CORS Settings for API Frontend
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React default
+    "http://localhost:5173",  # Vite default
+    "http://localhost:5174",  # Vite alternate
     "http://localhost:8080",  # Vue default
     "http://localhost:4200",  # Angular default
     "http://127.0.0.1:3000",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:5174",
     "http://127.0.0.1:8080",
     "http://127.0.0.1:4200",
 ]
@@ -226,6 +230,14 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
+# CSRF Settings
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:5174",
+]
+
 # REST Framework Configuration (optional but recommended)
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -243,6 +255,19 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+# Disable CSRF for DRF Session Authentication (for development with separate frontend)
+# This is needed when frontend is on a different port
+from rest_framework.authentication import SessionAuthentication
+
+class CsrfExemptSessionAuthentication(SessionAuthentication):
+    def enforce_csrf(self, request):
+        return  # To not perform the csrf check previously happening
+
+# Update REST_FRAMEWORK to use the CSRF-exempt session auth
+REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = [
+    'backend.settings.CsrfExemptSessionAuthentication',
+]
 
 # Spectacular settings for Swagger/OpenAPI documentation
 SPECTACULAR_SETTINGS = {

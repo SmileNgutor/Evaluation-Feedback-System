@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import { 
   Home, 
   HardDrive, 
@@ -32,6 +33,8 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -321,13 +324,12 @@ const Layout = ({ children }: LayoutProps) => {
           <footer className="mt-auto p-2 border-t border-gray-200">
             <div className="px-2 py-4">
               <div className="flex items-center gap-x-3.5 mb-2">
-                <img 
-                  className="shrink-0 size-8 rounded-full" 
-                  src="https://images.unsplash.com/photo-1734122415415-88cb1d7d5dc0?q=80&w=320&h=320&auto=format&fit=facearea&facepad=3&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                  alt="Avatar"
-                />
+                <div className="shrink-0 size-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+                  {user?.full_name.charAt(0).toUpperCase()}
+                </div>
                 <div>
-                  <div className="font-medium text-base text-gray-800">John Doe</div>
+                  <div className="font-medium text-base text-gray-800">{user?.full_name}</div>
+                  <div className="text-xs text-gray-500 capitalize">{user?.role.replace('_', ' ')}</div>
                 </div>
               </div>
 
@@ -339,7 +341,13 @@ const Layout = ({ children }: LayoutProps) => {
                 Profile
               </Link>
 
-              <button className="w-full flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100">
+              <button
+                onClick={async () => {
+                  await logout();
+                  navigate('/login');
+                }}
+                className="w-full flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+              >
                 <LogOut className="size-4" />
                 Log Out
               </button>
