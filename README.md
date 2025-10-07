@@ -1,22 +1,24 @@
-# Evaluation Feedback System - React Frontend
+# Feedback System Frontend
 
 This is the React frontend for the Evaluation Feedback System, converted from the original Laravel application.
 
-## Project Structure
+## Features
 
-```
-Evaluation-Feedback-System/
-├── frontend/           # React application
-│   ├── src/           # React source code
-│   ├── public/        # Static assets
-│   ├── package.json   # Dependencies
-│   └── README.md      # Frontend documentation
-├── .git/              # Git repository
-├── .gitignore         # Git ignore rules
-├── .editorconfig      # Editor configuration
-├── .gitattributes     # Git attributes
-└── README.md          # This file
-```
+- **Modern React with TypeScript**: Built with Vite and React 18
+- **Tailwind CSS**: Modern utility-first CSS framework
+- **React Router**: Client-side routing
+- **Lucide React**: Beautiful icons
+- **Responsive Design**: Mobile-first approach
+
+## Pages
+
+- **Dashboard**: Overview of all system sections (Student, Faculty, Admin, Staff)
+- **IT Support**: Submit and track IT support tickets
+- **Course Evaluation**: Student course evaluation forms
+- **Cafeteria Feedback**: Cafeteria service feedback
+- **Maintenance**: Facility maintenance requests
+- **User Management**: Admin user management interface
+- **Authentication**: Login and registration pages
 
 ## Getting Started
 
@@ -42,25 +44,36 @@ Evaluation-Feedback-System/
    npm run dev
    ```
 
-4. Open your browser and navigate to `http://localhost:5173` (or the port shown in the terminal)
+4. Open your browser and navigate to `http://localhost:5173`
 
-## Features
+### Available Scripts
 
-- **Modern React with TypeScript**: Built with Vite and React 18
-- **Tailwind CSS**: Modern utility-first CSS framework
-- **React Router**: Client-side routing
-- **Lucide React**: Beautiful icons
-- **Responsive Design**: Mobile-first approach
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
-## Pages
+## Project Structure
 
-- **Dashboard**: Overview of all system sections (Student, Faculty, Admin, Staff)
-- **IT Support**: Submit and track IT support tickets
-- **Course Evaluation**: Student course evaluation forms
-- **Cafeteria Feedback**: Cafeteria service feedback
-- **Maintenance**: Facility maintenance requests
-- **User Management**: Admin user management interface
-- **Authentication**: Login and registration pages
+```
+src/
+├── components/          # Reusable components
+│   └── Layout.tsx      # Main layout with sidebar
+├── pages/              # Page components
+│   ├── Dashboard.tsx
+│   ├── Login.tsx
+│   ├── Register.tsx
+│   ├── ITSupportStudent.tsx
+│   ├── CourseEvaluation.tsx
+│   ├── CafeteriaStudent.tsx
+│   ├── ClassStudent.tsx
+│   ├── CourseFeedbackFaculty.tsx
+│   ├── ITSupport.tsx
+│   └── UserManagement.tsx
+├── App.tsx             # Main app component with routing
+├── main.tsx            # Entry point
+└── index.css           # Global styles with Tailwind
+```
 
 ## Technologies Used
 
@@ -76,16 +89,23 @@ Evaluation-Feedback-System/
 
 The application is structured to work with a Django backend API. The frontend makes API calls to the backend for data operations.
 
+### Key Features
+
+1. **Responsive Sidebar Navigation**: Collapsible sidebar with role-based navigation
+2. **Modern UI Components**: Clean, accessible components
+3. **Form Handling**: Controlled forms with validation
+4. **State Management**: React hooks for local state
+5. **Routing**: Client-side routing with React Router
+
 ## Deployment
 
 To build for production:
 
 ```bash
-cd frontend
 npm run build
 ```
 
-The built files will be in the `frontend/dist/` directory, ready for deployment to any static hosting service.
+The built files will be in the `dist/` directory, ready for deployment to any static hosting service.
 
 ## Contributing
 

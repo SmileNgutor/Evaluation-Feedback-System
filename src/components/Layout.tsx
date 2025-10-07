@@ -1,27 +1,27 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { 
-  Home, 
-  HardDrive, 
-  ClipboardList, 
-  Utensils, 
-  Wrench, 
-  BarChart2, 
-  Cpu, 
-  Coffee, 
-  ClipboardCheck, 
-  Ticket, 
-  LineChart, 
-  Users, 
-  ListChecks, 
-  CheckCircle, 
-  Star, 
-  UtensilsCrossed, 
-  Bell, 
-  Calendar, 
-  FileText, 
-  User, 
+import { useAuth } from '../contexts/AuthContext.tsx';
+import {
+  Home,
+  HardDrive,
+  ClipboardList,
+  Utensils,
+  Wrench,
+  BarChart2,
+  Cpu,
+  Coffee,
+  ClipboardCheck,
+  Ticket,
+  LineChart,
+  Users,
+  ListChecks,
+  CheckCircle,
+  Star,
+  UtensilsCrossed,
+  Bell,
+  Calendar,
+  FileText,
+  User,
   LogOut,
   X
 } from 'lucide-react';
@@ -364,4 +364,4 @@ const Layout = ({ children }: LayoutProps) => {
   );
 };
 
-export default Layout; 
+export default Layout;
