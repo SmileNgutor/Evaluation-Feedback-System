@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Lock, User as UserIcon } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
-import { getCsrfToken } from '../services/api';
+import { useAuth } from '../contexts/AuthContext.tsx';
+import { getCsrfToken } from '../services/api.ts';
 
 const Login = () => {
   const navigate = useNavigate();
