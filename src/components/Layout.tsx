@@ -206,13 +206,14 @@ const Layout = ({ children }: LayoutProps) => {
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        className="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 text-gray-800"
-                        to="/admin/manage-tickets"
-                      >
-                        <Ticket className="size-4" />
-                        Manage Tickets
-                      </Link>
+                        <Link
+                            className={`flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100
+                          ${isActive('/manage-tickets') ? 'bg-gray-100 text-gray-800' : 'text-gray-800'}`}
+                            to="/manage-tickets"
+                        >
+                            <Users className="size-4" />
+                            Manage Tickets
+                        </Link>
                     </li>
                     <li>
                       <Link
