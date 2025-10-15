@@ -12,6 +12,7 @@ import ITSupport from './pages/ITSupport.tsx';
 import UserManagement from './pages/UserManagement.tsx';
 import Login from './pages/Login.tsx';
 import Register from './pages/Register.tsx';
+import AdminManageTickets from "./pages/admin-manage-tickets.tsx";
 
 function App() {
   return (
@@ -76,6 +77,14 @@ function App() {
             element={
                 <Layout>
                   <ITSupport />
+                </Layout>
+            }
+          />
+            <Route
+            path="/manage-tickets"
+            element={
+                <Layout>
+                  <AdminManageTickets />
                 </Layout>
             }
           />
