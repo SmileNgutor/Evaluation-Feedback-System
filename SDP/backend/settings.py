@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&7v%ov*c%eqe9i1!834!oz+%ov7t@zsb2ok4gfk*!$1^hk+10u'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-&7v%ov*c%eqe9i1!834!oz+%ov7t@zsb2ok4gfk*!$1^hk+10u')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',') if not DEBUG else []
 
 
 # Application definition
@@ -50,6 +50,7 @@ AUTH_USER_MODEL = 'authentication.AUNUser'
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # CORS middleware (should be at the top)
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Whitenoise for static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -144,7 +145,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -158,13 +161,19 @@ LOGOUT_REDIRECT_URL = '/auth/login/'
 
 # Session Settings
 SESSION_COOKIE_AGE = 3600 * 8  # 8 hours
-SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
+SESSION_COOKIE_SECURE = not DEBUG  # True in production with HTTPS
 SESSION_COOKIE_HTTPONLY = False  # Allow JavaScript access for CORS
-SESSION_COOKIE_SAMESITE = 'Lax'  # Allow cross-origin in development
+SESSION_COOKIE_SAMESITE = 'Lax'  # Allow cross-origin
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 CSRF_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_HTTPONLY = False
-CSRF_TRUSTED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173']
+CSRF_COOKIE_SECURE = not DEBUG
+
+# CSRF Trusted Origins - Add your production domain
+CSRF_TRUSTED_ORIGINS = os.environ.get(
+    'CSRF_TRUSTED_ORIGINS',
+    'http://localhost:5173,http://127.0.0.1:5173'
+).split(',')
 
 # Security Settings
 SECURE_BROWSER_XSS_FILTER = True
@@ -204,20 +213,26 @@ LOGGING = {
 }
 
 # CORS Settings for API Frontend
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React default
-    "http://localhost:5173",  # Vite default
-    "http://localhost:5174",  # Vite alternate
-    "http://localhost:8080",  # Vue default
-    "http://localhost:4200",  # Angular default
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:5174",
-    "http://127.0.0.1:8080",
-    "http://127.0.0.1:4200",
-]
+# Get allowed origins from environment variable for production
+CORS_ALLOWED_ORIGINS_ENV = os.environ.get('CORS_ALLOWED_ORIGINS', '')
+if CORS_ALLOWED_ORIGINS_ENV:
+    CORS_ALLOWED_ORIGINS = CORS_ALLOWED_ORIGINS_ENV.split(',')
+else:
+    # Default development origins
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000",  # React default
+        "http://localhost:5173",  # Vite default
+        "http://localhost:5174",  # Vite alternate
+        "http://localhost:8080",  # Vue default
+        "http://localhost:4200",  # Angular default
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:5174",
+        "http://127.0.0.1:8080",
+        "http://127.0.0.1:4200",
+    ]
 
-# Allow all origins in development (REMOVE IN PRODUCTION!)
+# Allow all origins in development only
 CORS_ALLOW_ALL_ORIGINS = DEBUG
 
 # CORS Headers
@@ -232,14 +247,6 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
-]
-
-# CSRF Settings
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:5174",
 ]
 
 # REST Framework Configuration (optional but recommended)
