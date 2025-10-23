@@ -11,7 +11,7 @@ export const evaluationService = {
     if (categoryId) {
       params.category_id = categoryId;
     }
-    const response = await api.get<ApiResponse<{ questions: EvaluationQuestion[]; count: number }>>('/evaluations/questions/', { params });
+    const response = await api.get<ApiResponse<{ questions: EvaluationQuestion[]; count: number }>>('/eval/questions/', { params });
     return response.data;
   },
 
@@ -19,7 +19,7 @@ export const evaluationService = {
    * Start an evaluation session
    */
   async startEvaluation(departmentId: number, key: string): Promise<ApiResponse<{ session_id: number }>> {
-    const response = await api.post<ApiResponse<{ session_id: number }>>('/evaluations/start/', {
+    const response = await api.post<ApiResponse<{ session_id: number }>>('/eval/start/', {
       department_id: departmentId,
       key: key,
     });
@@ -30,7 +30,7 @@ export const evaluationService = {
    * Submit evaluation responses
    */
   async submitEvaluation(sessionId: number, responses: EvaluationResponse[]): Promise<ApiResponse> {
-    const response = await api.post<ApiResponse>('/evaluations/submit/', {
+    const response = await api.post<ApiResponse>('/eval/submit/', {
       session_id: sessionId,
       responses: responses,
     });
@@ -41,7 +41,7 @@ export const evaluationService = {
    * Get department analytics (staff/admin only)
    */
   async getDepartmentAnalytics(departmentId: number): Promise<ApiResponse> {
-    const response = await api.get<ApiResponse>(`/evaluations/analytics/${departmentId}/`);
+    const response = await api.get<ApiResponse>(`/eval/analytics/${departmentId}/`);
     return response.data;
   },
 
@@ -49,7 +49,7 @@ export const evaluationService = {
    * Get department sessions (staff/admin only)
    */
   async getDepartmentSessions(departmentId: number): Promise<ApiResponse> {
-    const response = await api.get<ApiResponse>(`/evaluations/sessions/${departmentId}/`);
+    const response = await api.get<ApiResponse>(`/eval/sessions/${departmentId}/`);
     return response.data;
   },
 
@@ -57,7 +57,7 @@ export const evaluationService = {
    * Get session detail (staff/admin only)
    */
   async getSessionDetail(sessionId: number): Promise<ApiResponse> {
-    const response = await api.get<ApiResponse>(`/evaluations/session/${sessionId}/`);
+    const response = await api.get<ApiResponse>(`/eval/session/${sessionId}/`);
     return response.data;
   },
 
@@ -65,7 +65,7 @@ export const evaluationService = {
    * Submit staff response to evaluation
    */
   async submitStaffResponse(sessionId: number, message: string): Promise<ApiResponse> {
-    const response = await api.post<ApiResponse>(`/evaluations/staff-respond/${sessionId}/`, {
+    const response = await api.post<ApiResponse>(`/eval/staff-respond/${sessionId}/`, {
       message: message,
     });
     return response.data;

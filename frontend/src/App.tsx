@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext.tsx';
-import ProtectedRoute from './components/ProtectedRoute.tsx';
 import Layout from './components/Layout.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import ITSupportStudent from './pages/ITSupportStudent.tsx';
@@ -8,11 +7,14 @@ import CourseEvaluation from './pages/CourseEvaluation.tsx';
 import CafeteriaStudent from './pages/CafeteriaStudent.tsx';
 import ClassStudent from './pages/ClassStudent.tsx';
 import CourseFeedbackFaculty from './pages/CourseFeedbackFaculty.tsx';
+import FacultyITSupport from './pages/FacultyITSupport.tsx';
 import ITSupport from './pages/ITSupport.tsx';
 import UserManagement from './pages/UserManagement.tsx';
+import EvaluationPeriods from './pages/EvaluationPeriods.tsx';
+import EvaluationKeys from './pages/EvaluationKeys.tsx';
+import ManageQuestions from './pages/ManageQuestions.tsx';
 import Login from './pages/Login.tsx';
 import Register from './pages/Register.tsx';
-import AdminManageTickets from "./pages/admin-manage-tickets.tsx";
 
 function App() {
   return (
@@ -73,18 +75,18 @@ function App() {
             }
           />
           <Route
+            path="/faculty/it-support"
+            element={
+                <Layout>
+                  <FacultyITSupport />
+                </Layout>
+            }
+          />
+          <Route
             path="/it-support"
             element={
                 <Layout>
                   <ITSupport />
-                </Layout>
-            }
-          />
-            <Route
-            path="/manage-tickets"
-            element={
-                <Layout>
-                  <AdminManageTickets />
                 </Layout>
             }
           />
@@ -93,6 +95,46 @@ function App() {
             element={
                 <Layout>
                   <UserManagement />
+                </Layout>
+            }
+          />
+          <Route
+            path="/admin/evaluation-periods"
+            element={
+                <Layout>
+                  <EvaluationPeriods />
+                </Layout>
+            }
+          />
+          <Route
+            path="/department/evaluation-keys"
+            element={
+                <Layout>
+                  <EvaluationKeys />
+                </Layout>
+            }
+          />
+          <Route
+            path="/department/questions"
+            element={
+                <Layout>
+                  <ManageQuestions />
+                </Layout>
+            }
+          />
+          <Route
+            path="/department/analytics"
+            element={
+                <Layout>
+                  <CourseFeedbackFaculty />
+                </Layout>
+            }
+          />
+          <Route
+            path="/admin/reports-analytics"
+            element={
+                <Layout>
+                  <CourseFeedbackFaculty />
                 </Layout>
             }
           />

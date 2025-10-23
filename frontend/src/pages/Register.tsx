@@ -101,7 +101,7 @@ const Register = () => {
       }
 
       await register(registerData);
-      setSuccess('Registration successful! Please wait for admin verification before logging in.');
+      setSuccess('Registration successful! You can now log in with your credentials.');
 
       // Redirect to login after 3 seconds
       setTimeout(() => {

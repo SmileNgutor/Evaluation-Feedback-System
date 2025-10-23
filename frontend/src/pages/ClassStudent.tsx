@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Building, MapPin, AlertTriangle, Wrench, Clock, CheckCircle } from 'lucide-react';
+import { Search, Building, MapPin, AlertTriangle, AlertCircle, Wrench, Clock, CheckCircle, CheckCircle2, XCircle } from 'lucide-react';
 
 const ClassroomMaintenance = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -10,6 +10,11 @@ const ClassroomMaintenance = () => {
         priority: 'medium',
         specificLocation: ''
     });
+    const [submitting, setSubmitting] = useState(false);
+    const [success, setSuccess] = useState('');
+    const [error, setError] = useState('');
+    const [showTicketSummary, setShowTicketSummary] = useState(false);
+    const [submittedTicket, setSubmittedTicket] = useState<any>(null);
 
     // Dummy classroom data
     const classrooms = [
@@ -59,21 +64,42 @@ const ClassroomMaintenance = () => {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Maintenance ticket submitted:', {
-            classroom: selectedClassroom,
-            ticket: ticketData
-        });
-        alert('Maintenance ticket submitted successfully!');
-        // Reset form
-        setSelectedClassroom(null);
-        setTicketData({
-            issueType: '',
-            description: '',
-            priority: 'medium',
-            specificLocation: ''
-        });
+        setSubmitting(true);
+        setError('');
+        setSuccess('');
+
+        try {
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            console.log('Maintenance ticket submitted:', {
+                classroom: selectedClassroom,
+                ticket: ticketData
+            });
+
+            // Generate ticket number
+            const ticketNumber = `MNT-${Date.now().toString().slice(-6)}`;
+
+            // Store submitted ticket for visualization
+            setSubmittedTicket({
+                ticketNumber,
+                classroom: selectedClassroom,
+                ...ticketData,
+                submittedAt: new Date()
+            });
+
+            setSuccess('Maintenance ticket submitted successfully! Our team will address the issue soon.');
+
+            // Show ticket summary
+            setShowTicketSummary(true);
+
+        } catch (err) {
+            setError('Failed to submit maintenance ticket. Please try again.');
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     const isFormValid = ticketData.issueType && ticketData.description;
@@ -185,6 +211,30 @@ const ClassroomMaintenance = () => {
                         </div>
 
                         <form onSubmit={handleSubmit} className="p-6">
+                            {/* Success Message */}
+                            {success && (
+                                <div className="mb-6 rounded-md bg-green-50 p-4">
+                                    <div className="flex">
+                                        <CheckCircle2 className="h-5 w-5 text-green-400" />
+                                        <div className="ml-3">
+                                            <p className="text-sm text-green-800">{success}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Error Message */}
+                            {error && (
+                                <div className="mb-6 rounded-md bg-red-50 p-4">
+                                    <div className="flex">
+                                        <XCircle className="h-5 w-5 text-red-400" />
+                                        <div className="ml-3">
+                                            <p className="text-sm text-red-800">{error}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
                             <div className="space-y-6">
                                 {/* Issue Type */}
                                 <div>
@@ -263,15 +313,15 @@ const ClassroomMaintenance = () => {
                             <div className="mt-8 pt-6 border-t border-gray-200">
                                 <button
                                     type="submit"
-                                    disabled={!isFormValid}
+                                    disabled={!isFormValid || submitting}
                                     className={`w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
-                                        isFormValid
+                                        isFormValid && !submitting
                                             ? 'bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500'
                                             : 'bg-gray-400 cursor-not-allowed'
                                     }`}
                                 >
                                     <AlertTriangle className="h-4 w-4" />
-                                    Submit Maintenance Ticket
+                                    {submitting ? 'Submitting...' : 'Submit Maintenance Ticket'}
                                 </button>
                                 {!isFormValid && (
                                     <p className="text-sm text-gray-500 text-center mt-2">
@@ -323,6 +373,180 @@ const ClassroomMaintenance = () => {
                                     <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                     Scheduled
                   </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Ticket Summary Visualization */}
+                {showTicketSummary && submittedTicket && (
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                        <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-yellow-50">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                                        <CheckCircle2 className="h-6 w-6 text-green-500" />
+                                        Ticket Submitted Successfully!
+                                    </h3>
+                                    <p className="text-sm text-gray-600 mt-1">
+                                        Ticket #{submittedTicket.ticketNumber}
+                                    </p>
+                                </div>
+                                <button
+                                    onClick={() => {
+                                        setShowTicketSummary(false);
+                                        setSubmittedTicket(null);
+                                        setSelectedClassroom(null);
+                                        setSuccess('');
+                                    }}
+                                    className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+                                >
+                                    Submit Another Ticket
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="p-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Ticket Details Card */}
+                                <div className="border border-gray-200 rounded-lg p-4 bg-white">
+                                    <h4 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                                        <Building className="h-5 w-5 text-blue-600" />
+                                        Location Details
+                                    </h4>
+                                    <div className="space-y-3">
+                                        <div>
+                                            <p className="text-xs text-gray-500">Classroom</p>
+                                            <p className="text-sm font-medium text-gray-900">{submittedTicket.classroom.code}</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-xs text-gray-500">Building</p>
+                                            <p className="text-sm font-medium text-gray-900">{submittedTicket.classroom.building}</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-xs text-gray-500">Floor</p>
+                                            <p className="text-sm font-medium text-gray-900">{submittedTicket.classroom.floor}</p>
+                                        </div>
+                                        {submittedTicket.specificLocation && (
+                                            <div>
+                                                <p className="text-xs text-gray-500">Specific Location</p>
+                                                <p className="text-sm font-medium text-gray-900">{submittedTicket.specificLocation}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Issue Details Card */}
+                                <div className="border border-gray-200 rounded-lg p-4 bg-white">
+                                    <h4 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                                        <AlertTriangle className="h-5 w-5 text-orange-600" />
+                                        Issue Details
+                                    </h4>
+                                    <div className="space-y-3">
+                                        <div>
+                                            <p className="text-xs text-gray-500">Issue Type</p>
+                                            <p className="text-sm font-medium text-gray-900">{submittedTicket.issueType}</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-xs text-gray-500">Priority</p>
+                                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                                                submittedTicket.priority === 'urgent' ? 'bg-red-100 text-red-800' :
+                                                submittedTicket.priority === 'high' ? 'bg-orange-100 text-orange-800' :
+                                                submittedTicket.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                                                'bg-green-100 text-green-800'
+                                            }`}>
+                                                {submittedTicket.priority.charAt(0).toUpperCase() + submittedTicket.priority.slice(1)}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <p className="text-xs text-gray-500">Submitted</p>
+                                            <p className="text-sm font-medium text-gray-900">
+                                                {submittedTicket.submittedAt.toLocaleString()}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Description Card */}
+                            <div className="border border-gray-200 rounded-lg p-4 bg-white mt-6">
+                                <h4 className="font-semibold text-gray-800 mb-2">Issue Description</h4>
+                                <p className="text-sm text-gray-600 whitespace-pre-wrap">{submittedTicket.description}</p>
+                            </div>
+
+                            {/* Status Timeline */}
+                            <div className="border border-gray-200 rounded-lg p-4 bg-white mt-6">
+                                <h4 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                                    <Clock className="h-5 w-5 text-blue-600" />
+                                    Expected Timeline
+                                </h4>
+                                <div className="space-y-4">
+                                    <div className="flex items-start gap-3">
+                                        <div className="flex-shrink-0">
+                                            <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
+                                                <CheckCircle className="h-5 w-5 text-green-600" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-medium text-gray-900">Ticket Submitted</p>
+                                            <p className="text-xs text-gray-500">Just now</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-3">
+                                        <div className="flex-shrink-0">
+                                            <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                                <Clock className="h-5 w-5 text-blue-600" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-medium text-gray-900">Under Review</p>
+                                            <p className="text-xs text-gray-500">Within 2 hours</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-3">
+                                        <div className="flex-shrink-0">
+                                            <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                                                <Wrench className="h-5 w-5 text-gray-600" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-medium text-gray-900">In Progress</p>
+                                            <p className="text-xs text-gray-500">
+                                                {submittedTicket.priority === 'urgent' ? '2-4 hours' :
+                                                 submittedTicket.priority === 'high' ? '4-8 hours' :
+                                                 submittedTicket.priority === 'medium' ? '1-2 days' :
+                                                 '2-3 days'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-3">
+                                        <div className="flex-shrink-0">
+                                            <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                                                <CheckCircle className="h-5 w-5 text-gray-600" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-medium text-gray-900">Resolved</p>
+                                            <p className="text-xs text-gray-500">Estimated completion</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Info Banner */}
+                            <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mt-6">
+                                <div className="flex">
+                                    <div className="flex-shrink-0">
+                                        <AlertCircle className="h-5 w-5 text-blue-400" />
+                                    </div>
+                                    <div className="ml-3">
+                                        <p className="text-sm text-blue-700">
+                                            <span className="font-medium">Ticket Reference: {submittedTicket.ticketNumber}</span>
+                                            <br />
+                                            You will receive email updates about your maintenance request. Our team will review and address this issue based on the priority level.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

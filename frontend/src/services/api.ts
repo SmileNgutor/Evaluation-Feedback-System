@@ -14,16 +14,6 @@ const api = axios.create({
   xsrfHeaderName: 'X-CSRFToken',
 });
 
-// Helper function to get cookie
-function getCookie(name: string): string | null {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) {
-    return parts.pop()?.split(';').shift() || null;
-  }
-  return null;
-}
-
 // Get CSRF token before making any requests
 export const getCsrfToken = async () => {
   try {
@@ -34,7 +24,7 @@ export const getCsrfToken = async () => {
 };
 
 // API response interface
-interface ApiResponse<T = any> {
+export interface ApiResponse<T = any> {
   success: boolean;
   message?: string;
   data?: T;
@@ -43,4 +33,3 @@ interface ApiResponse<T = any> {
 
 export default api;
 export { API_BASE_URL };
-export type { ApiResponse };

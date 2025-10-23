@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Utensils, MapPin, CheckCircle } from 'lucide-react';
+import { Search, Utensils, MapPin, CheckCircle, CheckCircle2, XCircle } from 'lucide-react';
 
 const CatererFeedback = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -8,6 +8,11 @@ const CatererFeedback = () => {
         answers: ['', '', '', '', ''],
         additionalComments: ''
     });
+    const [submitting, setSubmitting] = useState(false);
+    const [success, setSuccess] = useState('');
+    const [error, setError] = useState('');
+    const [showResults, setShowResults] = useState(false);
+    const [submittedResponse, setSubmittedResponse] = useState<any>(null);
 
     // Dummy caterer data
     const caterers = [
@@ -88,13 +93,38 @@ const CatererFeedback = () => {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Caterer feedback submitted:', {
-            caterer: selectedCaterer,
-            feedback: feedbackData
-        });
-        alert('Thank you for your feedback!');
+        setSubmitting(true);
+        setError('');
+        setSuccess('');
+
+        try {
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            console.log('Caterer feedback submitted:', {
+                caterer: selectedCaterer,
+                feedback: feedbackData
+            });
+
+            // Store submitted response for visualization
+            setSubmittedResponse({
+                caterer: selectedCaterer,
+                responses: feedbackData.answers,
+                questions: questions
+            });
+
+            setSuccess('Thank you for your feedback! Your input helps us improve our food services.');
+
+            // Show results visualization
+            setShowResults(true);
+
+        } catch (err) {
+            setError('Failed to submit feedback. Please try again.');
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     const isFormComplete = feedbackData.answers.every(answer => answer !== '');
@@ -192,6 +222,30 @@ const CatererFeedback = () => {
                         </div>
 
                         <form onSubmit={handleSubmit} className="p-6">
+                            {/* Success Message */}
+                            {success && (
+                                <div className="mb-6 rounded-md bg-green-50 p-4">
+                                    <div className="flex">
+                                        <CheckCircle2 className="h-5 w-5 text-green-400" />
+                                        <div className="ml-3">
+                                            <p className="text-sm text-green-800">{success}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Error Message */}
+                            {error && (
+                                <div className="mb-6 rounded-md bg-red-50 p-4">
+                                    <div className="flex">
+                                        <XCircle className="h-5 w-5 text-red-400" />
+                                        <div className="ml-3">
+                                            <p className="text-sm text-red-800">{error}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
                             {/* Feedback Questions */}
                             <div className="space-y-8">
                                 {questions.map((question, index) => (
@@ -241,15 +295,15 @@ const CatererFeedback = () => {
                             <div className="mt-8 pt-6 border-t border-gray-200">
                                 <button
                                     type="submit"
-                                    disabled={!isFormComplete}
+                                    disabled={!isFormComplete || submitting}
                                     className={`w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
-                                        isFormComplete
+                                        isFormComplete && !submitting
                                             ? 'bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500'
                                             : 'bg-gray-400 cursor-not-allowed'
                                     }`}
                                 >
                                     <CheckCircle className="h-4 w-4" />
-                                    Submit Feedback
+                                    {submitting ? 'Submitting...' : 'Submit Feedback'}
                                 </button>
                                 {!isFormComplete && (
                                     <p className="text-sm text-gray-500 text-center mt-2">
@@ -258,6 +312,146 @@ const CatererFeedback = () => {
                                 )}
                             </div>
                         </form>
+                    </div>
+                )}
+
+                {/* Results Visualization */}
+                {showResults && submittedResponse && (
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                        <div className="p-6 border-b border-gray-200">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <h3 className="text-lg font-semibold text-gray-800">Your Feedback Summary</h3>
+                                    <p className="text-sm text-gray-600 mt-1">
+                                        Feedback for: {submittedResponse.caterer.name}
+                                    </p>
+                                </div>
+                                <button
+                                    onClick={() => {
+                                        setShowResults(false);
+                                        setSubmittedResponse(null);
+                                        setSelectedCaterer(null);
+                                        setFeedbackData({
+                                            answers: ['', '', '', '', ''],
+                                            additionalComments: ''
+                                        });
+                                        setSuccess('');
+                                    }}
+                                    className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+                                >
+                                    Submit Another Feedback
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="p-6">
+                            <div className="space-y-6">
+                                {/* Visual Rating Bars */}
+                                {submittedResponse.questions.map((question: any, index: number) => {
+                                    const response = submittedResponse.responses[index];
+                                    const totalOptions = question.options.length;
+                                    const responseIndex = question.options.indexOf(response);
+                                    const percentage = ((responseIndex + 1) / totalOptions) * 100;
+
+                                    // Determine color based on rating
+                                    let barColor = 'bg-red-500';
+                                    if (percentage >= 80) barColor = 'bg-green-500';
+                                    else if (percentage >= 60) barColor = 'bg-yellow-500';
+                                    else if (percentage >= 40) barColor = 'bg-orange-500';
+
+                                    return (
+                                        <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0">
+                                            <div className="mb-2">
+                                                <p className="text-sm font-medium text-gray-700">
+                                                    {index + 1}. {question.question}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center gap-4">
+                                                <div className="flex-1">
+                                                    <div className="relative pt-1">
+                                                        <div className="flex items-center justify-between mb-2">
+                                                            <span className="text-xs font-semibold inline-block text-blue-600">
+                                                                Your Rating: {response}
+                                                            </span>
+                                                            <span className="text-xs font-semibold inline-block text-gray-600">
+                                                                {Math.round(percentage)}%
+                                                            </span>
+                                                        </div>
+                                                        <div className="overflow-hidden h-3 text-xs flex rounded bg-gray-200">
+                                                            <div
+                                                                style={{ width: `${percentage}%` }}
+                                                                className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center ${barColor} transition-all duration-500`}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+
+                                {/* Overall Score Card */}
+                                <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-6 mt-6">
+                                    <h4 className="text-lg font-semibold text-gray-800 mb-4">Overall Satisfaction</h4>
+                                    <div className="flex items-center justify-center">
+                                        <div className="text-center">
+                                            {(() => {
+                                                const averagePercentage = submittedResponse.responses.reduce((sum: number, response: string, idx: number) => {
+                                                    const question = submittedResponse.questions[idx];
+                                                    const responseIndex = question.options.indexOf(response);
+                                                    return sum + ((responseIndex + 1) / question.options.length) * 100;
+                                                }, 0) / submittedResponse.responses.length;
+
+                                                const roundedScore = Math.round(averagePercentage);
+                                                let scoreColor = 'text-red-600';
+                                                let scoreLabel = 'Needs Improvement';
+
+                                                if (roundedScore >= 80) {
+                                                    scoreColor = 'text-green-600';
+                                                    scoreLabel = 'Excellent';
+                                                } else if (roundedScore >= 60) {
+                                                    scoreColor = 'text-yellow-600';
+                                                    scoreLabel = 'Good';
+                                                } else if (roundedScore >= 40) {
+                                                    scoreColor = 'text-orange-600';
+                                                    scoreLabel = 'Fair';
+                                                }
+
+                                                return (
+                                                    <>
+                                                        <div className={`text-6xl font-bold ${scoreColor}`}>
+                                                            {roundedScore}%
+                                                        </div>
+                                                        <div className="text-lg font-medium text-gray-700 mt-2">
+                                                            {scoreLabel}
+                                                        </div>
+                                                        <div className="text-sm text-gray-500 mt-1">
+                                                            Based on your ratings
+                                                        </div>
+                                                    </>
+                                                );
+                                            })()}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Thank You Message */}
+                                <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mt-6">
+                                    <div className="flex">
+                                        <div className="flex-shrink-0">
+                                            <CheckCircle className="h-5 w-5 text-blue-400" />
+                                        </div>
+                                        <div className="ml-3">
+                                            <p className="text-sm text-blue-700">
+                                                <span className="font-medium">Thank you for your valuable feedback!</span>
+                                                <br />
+                                                Your responses help {submittedResponse.caterer.name} improve their services and food quality.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
